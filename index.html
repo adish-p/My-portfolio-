@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Adish – Computer Engineering Portfolio 2025</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,800;1,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <!-- Background videos: light (default) and dark -->
+    <div class="bg">
+      <video id="vl" src="bg-light.mp4" muted loop playsinline preload="auto"></video>
+      <video id="vd" src="bg-dark.mp4" muted loop playsinline preload="auto"></video>
+      <b></b>
+      <i id="veil"></i>
+    </div>
+    <!-- Navigation -->
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <!-- Dark / light toggle button (top right) -->
+    <button id="tg" class="tg" aria-label="Switch dark and light mode" aria-pressed="false">
+      <span class="st"><i></i><i></i><i></i></span>
+      <span class="cl"></span>
+      <span class="kn"><b></b><b></b></span>
+    </button>
+    <!-- Hero: floating specks, stars and title box -->
+    <header class="hero">
+      <div class="motes" id="motes" aria-hidden="true"></div>
+      <div class="stars" id="stars" aria-hidden="true"><b class="sh"></b><b class="sh s2"></b></div>
+      <div class="who">Adish</div>
+      <div class="title">
+        <h1 aria-label="Portfolio">
+          <span>PORT</span>
+          <span>FOLIO</span>
+        </h1>
+        <em>Computer Engineering</em>
+        <u>2025</u>
+      </div>
+    </header>
+    <!-- Main white sheet -->
+    <main class="sheet">
+      <!-- About me: name, bio, avatar and contacts -->
+      <div id="about">
+        <div class="lbl">About Me!</div>
+        <div class="about">
+          <div>
+            <div class="name rv">
+              ADISH
+              <svg class="arr" viewBox="0 0 150 60">
+                <path d="M4 30C40 6 100 4 140 40M140 40l-18-4M140 40l-4-18"/>
+              </svg>
+            </div>
+            <div class="aka rv">Based in <b>Kannur, Kerala, India</b></div>
+            <div class="role rv">Adish · Diploma in Computer Engineering · Third Year</div>
+            <p class="bio rv"><b>Hi!</b> I'm Adish, a third-year Diploma in Computer Engineering student from Kannur, Kerala, India. I enjoy web development, artificial intelligence, embedded systems and IoT, and I love building practical projects, from clean code to animated 3D websites. I'm always eager to learn and explore new technologies, because every project is a new chance to bring an idea to life.</p>
+          </div>
+          <div class="ph" aria-label="Illustrated avatar of a young man with wavy hair and a dark green shirt">
+            <svg viewBox="0 0 200 200">
+              <defs>
+                <linearGradient id="pg" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#34508f"/>
+                  <stop offset="1" stop-color="#0f1424"/>
+                </linearGradient>
+              </defs>
+              <rect width="200" height="200" fill="url(#pg)"/>
+              <circle cx="40" cy="40" r="30" fill="#5f8cff" opacity=".18"/>
+              <g font-family="monospace" font-weight="700" fill="#9ec5ff">
+                <text class="cd c1" x="22" y="172" font-size="11">&lt;/&gt;</text>
+                <text class="cd c2" x="156" y="168" font-size="10">{ }</text>
+                <text class="cd c3" x="34" y="126" font-size="9">01</text>
+                <text class="cd c4" x="150" y="132" font-size="9">py</text>
+              </g>
+              <g class="hd">
+                <rect x="88" y="120" width="24" height="30" fill="#a86f48"/>
+                <circle cx="65" cy="94" r="7" fill="#b27650"/>
+                <circle cx="135" cy="94" r="7" fill="#b27650"/>
+                <ellipse cx="100" cy="90" rx="34" ry="41" fill="#b97d56"/>
+                <path d="M64 90C57 54 76 36 102 36C128 36 145 54 136 92C134 76 128 66 118 62C104 68 82 66 72 76C67 80 65 84 64 90Z" fill="#1b1820"/>
+                <g fill="#1b1820">
+                  <circle cx="72" cy="52" r="12"/>
+                  <circle cx="88" cy="42" r="13"/>
+                  <circle cx="106" cy="40" r="13"/>
+                  <circle cx="124" cy="46" r="13"/>
+                  <circle cx="136" cy="62" r="10"/>
+                  <circle cx="66" cy="66" r="9"/>
+                  <circle cx="96" cy="52" r="10"/>
+                  <circle cx="114" cy="54" r="10"/>
+                  <circle cx="82" cy="60" r="8"/>
+                </g>
+                <path class="eb" d="M71 79q10-6 21-1M108 78q11-5 21 1" stroke="#1b1820" stroke-width="3.6" fill="none" stroke-linecap="round"/>
+                <g class="bl" fill="#1a1010">
+                  <ellipse cx="82" cy="90" rx="4.2" ry="3.3"/>
+                  <ellipse cx="118" cy="90" rx="4.2" ry="3.3"/>
+                </g>
+                <g fill="#fff">
+                  <circle cx="83.4" cy="88.8" r="1"/>
+                  <circle cx="119.4" cy="88.8" r="1"/>
+                </g>
+                <path d="M100 92v12q-5 4-9 1" stroke="#8f5a3a" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+                <path d="M88 110q12-5 24 0" stroke="#4a3226" stroke-width="3" fill="none" stroke-linecap="round" opacity=".45"/>
+                <path d="M88 115q12 9 24 0" stroke="#6b2f22" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+                <ellipse cx="72" cy="106" rx="6" ry="4" fill="#d98a6c" opacity=".35"/>
+                <ellipse cx="128" cy="106" rx="6" ry="4" fill="#d98a6c" opacity=".35"/>
+              </g>
+              <path d="M22 200C28 156 62 144 100 144C138 144 172 156 178 200Z" fill="#1f4a43"/>
+              <path d="M86 144L100 170L114 144Z" fill="#a86f48"/>
+              <path d="M76 144L100 172L88 176L68 152Z" fill="#173a35"/>
+              <path d="M124 144L100 172L112 176L132 152Z" fill="#173a35"/>
+              <path d="M100 172V200" stroke="#12302b" stroke-width="1.6"/>
+              <rect x="54" y="170" width="92" height="52" rx="7" fill="#9aa3b5" stroke="#7d8698" stroke-width="2"/>
+              <circle class="lg" cx="100" cy="190" r="6" fill="#eef3ff"/>
+              <ellipse class="h1" cx="62" cy="176" rx="10" ry="6.5" fill="#b97d56"/>
+              <ellipse class="h2" cx="138" cy="176" rx="10" ry="6.5" fill="#b97d56"/>
+            </svg>
+          </div>
+        </div>
+        <div class="cts rv">
+          <a>
+            <svg viewBox="0 0 24 24">
+              <path d="M8 8l-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/>
+            </svg>
+            Computer Engineering
+          </a>
+          <a>
+            <svg viewBox="0 0 24 24">
+              <path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/>
+              <circle cx="12" cy="10" r="2.5"/>
+            </svg>
+            Kannur, Kerala, India
+          </a>
+          <a href="mailto:adishp449@gmail.com">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="5" width="18" height="14" rx="2"/>
+              <path d="M3 7l9 6 9-6"/>
+            </svg>
+            adishp449@gmail.com
+          </a>
+        </div>
+      </div>
+      <!-- Education, Skills and Technologies -->
+      <div id="skills" class="det rv">
+        <div>
+          <h2>
+            <svg viewBox="0 0 26 26">
+              <path d="M20 4C8 0 0 10 4 18c3 6 14 4 15-4 1-6-8-6-9-2"/>
+            </svg>
+            Education
+          </h2>
+          <p><strong>Diploma in Computer Engineering</strong><br>Third Year · EKNM Government Polytechnic College, Kalliasseri</p>
+          <h2>Skills</h2>
+          <ul>
+            <li>Programming: C, Python, JavaScript</li>
+            <li>Web Development: HTML, CSS, PHP</li>
+            <li>Database: MySQL</li>
+          </ul>
+        </div>
+        <div>
+          <h2>Technologies</h2>
+          <div class="bars">
+            <div>Python · Advanced<s style="--w:90%;--c:#3b82f6"></s></div>
+            <div>JavaScript · Beginner<s style="--w:35%;--c:#f5b301"></s></div>
+            <div>C · Beginner<s style="--w:35%;--c:#7a68e8"></s></div>
+            <div>HTML · Advanced<s style="--w:90%;--c:#ee5a2b"></s></div>
+            <div>CSS · Advanced<s style="--w:90%;--c:#2d9bf0"></s></div>
+            <div>PHP · Advanced<s style="--w:88%;--c:#8a7cff"></s></div>
+            <div>MySQL · Intermediate<s style="--w:65%;--c:#12a37e"></s></div>
+          </div>
+        </div>
+      </div>
+      <!-- Education details timeline -->
+      <div id="education" class="works rv">
+        <h2>Education details</h2>
+        <div class="tl">
+          <div class="ti">
+            <i></i>
+            <div class="tc">
+              <span class="yr">Third Year · Present</span>
+              <h3>Diploma in Computer Engineering</h3>
+              <p>EKNM Government Polytechnic College, Kalliasseri</p>
+              <p>Studying computer engineering with a focus on web development, AI and embedded systems.</p>
+            </div>
+          </div>
+          <div class="ti">
+            <i></i>
+            <div class="tc">
+              <span class="yr">Before the Diploma</span>
+              <h3>Higher Secondary Education</h3>
+              <p>School name: to be added later.</p>
+              <p>Stream and year: to be added later.</p>
+            </div>
+          </div>
+        </div>
+        <div class="cap">Areas of interest</div>
+        <div class="chips">
+          <span>Web Development</span>
+          <span>Artificial Intelligence and Machine Learning</span>
+          <span>Embedded Systems and IoT</span>
+          <span>Building Practical Projects</span>
+          <span>3D and Animated Websites</span>
+          <span>Cybersecurity</span>
+        </div>
+      </div>
+      <!-- Projects -->
+      <div id="projects" class="works rv">
+        <h2>Projects</h2>
+        <div class="g">
+          <div class="w" style="--bg:#d6ecf3">
+            <em class="pj">Project 1</em>
+            <h3>Digital Canteen Website</h3>
+            <p>A web-based food ordering system designed to make college canteen ordering easier and faster.</p>
+            <div class="tech"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>PHP</span><span>MySQL</span></div>
+          </div>
+          <div class="w" style="--bg:#f6dfe6">
+            <em class="pj">Project 2</em>
+            <h3>Personal Portfolio Website</h3>
+            <p>A personal website designed to showcase my technical skills, projects, interests, and professional information.</p>
+            <div class="tech"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- Certifications and professional profiles -->
+      <div id="profiles" class="works rv">
+        <h2>Certifications and profiles</h2>
+        <div class="g">
+          <div class="w" style="--bg:#d6ecf3"><em class="pj">Certifications</em><h3>To be added later</h3></div>
+          <div class="w" style="--bg:#f6dfe6"><em class="pj">GitHub</em><h3>To be added later</h3></div>
+          <div class="w" style="--bg:#dcdcf5"><em class="pj">LinkedIn</em><h3>To be added later</h3></div>
+        </div>
+      </div>
+      <!-- Footer -->
+      <footer id="contact" class="ft">
+        <h2>Let's work together</h2>
+        <a href="mailto:adishp449@gmail.com">adishp449@gmail.com</a>
+        <p>© 2025 Adish</p>
+      </footer>
+    </main>
+    <!-- Scripts -->
+    <script src="script.js"></script>
+  </body>
+</html>

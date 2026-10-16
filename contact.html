@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Contact – Adish</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,800;1,500&display=swap" rel="stylesheet">
+
+  <!-- Apply the saved theme before the page paints (shared with the main page) -->
+  <script>
+    try { document.documentElement.setAttribute('data-theme', localStorage.getItem('theme2') || 'light'); } catch (e) {}
+  </script>
+
+  <style>
+    /* ==========================================================
+       Contact page - single file (HTML + CSS + JS)
+       No video: the background is drawn with CSS.
+       ========================================================== */
+
+    /* ---------- Theme colours ---------- */
+    :root {
+      --navy: #26215a;
+      --blue: #2f84c4;
+      --pink: #e0407f;
+      --ink: #2a2840;
+      --mut: #6c7a86;
+      --line: rgba(38, 33, 90, .14);
+      --card: rgba(255, 255, 255, .7);
+      --field: rgba(255, 255, 255, .75);
+      --bgc: #e4eeea;
+      --b1: #9fd3d3;
+      --b2: #f6c9d8;
+      --b3: #cdd7ff;
+      --dot: rgba(38, 33, 90, .12);
+      --pnb: rgba(255, 255, 255, .86);
+    }
+    html[data-theme=dark] {
+      --navy: #dfe3ff;
+      --blue: #6bb8ff;
+      --pink: #ff6b9d;
+      --ink: #e8ebf5;
+      --mut: #a3abc4;
+      --line: rgba(255, 255, 255, .14);
+      --card: rgba(20, 26, 48, .7);
+      --field: rgba(255, 255, 255, .06);
+      --bgc: #0b1020;
+      --b1: #1c3d73;
+      --b2: #3d1d63;
+      --b3: #0f5a5f;
+      --dot: rgba(255, 255, 255, .1);
+      --pnb: rgba(14, 18, 34, .78);
+    }
+
+    /* ---------- Base ---------- */
+    * { box-sizing: border-box; margin: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Poppins, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bgc);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background .6s, color .6s;
+    }
+    body::before { /* keeps content clear of the phone status bar */
+      content: "";
+      position: fixed;
+      inset: 0 0 auto;
+      height: env(safe-area-inset-top, 0px);
+      z-index: 30;
+    }
+
+    /* ---------- Drawn background ---------- */
+    .bg {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      background: var(--bgc);
+      transition: background .6s;
+    }
+    .bg::after { /* soft dot grid */
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(var(--dot) 1.2px, transparent 1.4px);
+      background-size: 26px 26px;
+      -webkit-mask-image: radial-gradient(ellipse at 50% 40%, #000 20%, transparent 80%);
+      mask-image: radial-gradient(ellipse at 50% 40%, #000 20%, transparent 80%);
+    }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: .85;
+      transition: background .8s;
+    }
+    .blob.a { width: 46vmax; height: 46vmax; left: -12vmax; top: -14vmax; background: var(--b1); animation: drift1 22s ease-in-out infinite alternate; }
+    .blob.b { width: 38vmax; height: 38vmax; right: -10vmax; top: 10vmax; background: var(--b2); animation: drift2 26s ease-in-out infinite alternate; }
+    .blob.c { width: 40vmax; height: 40vmax; left: 20vmax; bottom: -22vmax; background: var(--b3); animation: drift3 30s ease-in-out infinite alternate; }
+    @keyframes drift1 { to { transform: translate(8vmax, 6vmax) scale(1.1); } }
+    @keyframes drift2 { to { transform: translate(-7vmax, 8vmax) scale(.92); } }
+    @keyframes drift3 { to { transform: translate(-6vmax, -7vmax) scale(1.12); } }
+
+    /* Stars (dark mode only) */
+    .stars {
+      position: absolute;
+      inset: 0 0 35% 0;
+      opacity: 0;
+      transition: opacity 1.2s;
+    }
+    html[data-theme=dark] .stars { opacity: 1; }
+    .stars i {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      background: #fff;
+      animation: twinkle 2.4s ease-in-out infinite;
+    }
+    .stars b {
+      position: absolute;
+      top: 14%;
+      left: 40%;
+      width: 110px;
+      height: 2px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, transparent, #fff);
+      opacity: 0;
+      transform: rotate(28deg);
+      animation: shoot 9s ease-in infinite;
+    }
+    @keyframes twinkle { 50% { transform: scale(.4); } }
+    @keyframes shoot {
+      0%, 84% { opacity: 0; transform: translate(0, 0) rotate(28deg); }
+      88% { opacity: 1; }
+      100% { opacity: 0; transform: translate(300px, 160px) rotate(28deg); }
+    }
+
+    /* ---------- Navigation ---------- */
+    nav {
+      position: fixed;
+      top: calc(env(safe-area-inset-top, 0px) + 12px);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      display: flex;
+      gap: 4px;
+      padding: 5px;
+      border-radius: 40px;
+      background: var(--pnb);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 6px 24px rgba(38, 33, 90, .12);
+      font-size: 13px;
+      font-weight: 500;
+    }
+    nav a {
+      color: var(--navy);
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 30px;
+      transition: background .3s, color .3s;
+    }
+    nav a:hover,
+    nav a.cur { background: var(--navy); color: #fff; }
+    html[data-theme=dark] nav a:hover,
+    html[data-theme=dark] nav a.cur { color: #0b1020; }
+
+    /* ---------- Dark / light toggle (top right) ---------- */
+    .tg {
+      position: fixed;
+      top: calc(env(safe-area-inset-top, 0px) + 12px);
+      right: 14px;
+      z-index: 21;
+      width: 64px;
+      height: 34px;
+      border: 0;
+      padding: 0;
+      border-radius: 34px;
+      cursor: pointer;
+      overflow: hidden;
+      background: linear-gradient(#5fb4ff, #b4e1ff);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, .28);
+      transition: background .6s;
+    }
+    .tg:focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; }
+    .tg .kn {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #ffd34a;
+      box-shadow: 0 0 14px #ffb300;
+      transition: transform .7s cubic-bezier(.3, 1.5, .5, 1), background .6s, box-shadow .6s;
+      animation: glow 2.6s ease-in-out infinite;
+    }
+    @keyframes glow { 50% { box-shadow: 0 0 22px #ffb300; } }
+    .tg .kn b { position: absolute; border-radius: 50%; background: #b9c0e0; opacity: 0; transition: opacity .5s; }
+    .tg .kn b:nth-child(1) { width: 7px; height: 7px; left: 5px; top: 6px; }
+    .tg .kn b:nth-child(2) { width: 5px; height: 5px; left: 14px; top: 15px; }
+    .tg .cl {
+      position: absolute;
+      left: 34px;
+      bottom: 5px;
+      width: 20px;
+      height: 9px;
+      border-radius: 9px;
+      background: #fff;
+      box-shadow: -6px -4px 0 -1px #fff;
+      transition: transform .6s, opacity .6s;
+      animation: cloud 5s ease-in-out infinite alternate;
+    }
+    @keyframes cloud { to { margin-left: -6px; } }
+    .tg .st i {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: #fff;
+      opacity: 0;
+      transition: opacity .6s;
+      animation: twinkle 2s ease-in-out infinite;
+    }
+    .tg .st i:nth-child(1) { left: 10px; top: 8px; }
+    .tg .st i:nth-child(2) { left: 20px; top: 22px; animation-delay: -.7s; }
+    .tg .st i:nth-child(3) { left: 28px; top: 10px; animation-delay: -1.3s; }
+    html[data-theme=dark] .tg { background: linear-gradient(#0e1230, #2b3070); }
+    html[data-theme=dark] .tg .kn { transform: translateX(30px) rotate(360deg); background: #e9edff; box-shadow: 0 0 12px rgba(190, 200, 255, .7); animation: none; }
+    html[data-theme=dark] .tg .kn b,
+    html[data-theme=dark] .tg .st i { opacity: 1; }
+    html[data-theme=dark] .tg .cl { opacity: 0; transform: translateY(14px); }
+
+    /* ---------- Page layout ---------- */
+    .wrap {
+      width: min(1040px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: calc(env(safe-area-inset-top, 0px) + 96px) 0 calc(env(safe-area-inset-bottom, 0px) + 40px);
+    }
+
+    /* Heading row: big title on the left, intro text on the right */
+    .head {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: clamp(20px, 5vw, 70px);
+      align-items: end;
+      margin-bottom: clamp(28px, 5vw, 56px);
+    }
+    .tag {
+      display: block;
+      font: italic 500 clamp(17px, 1.8vw, 22px) Poppins, sans-serif;
+      color: var(--mut);
+      margin-bottom: 10px;
+    }
+    h1 {
+      font-weight: 800;
+      font-size: clamp(60px, 11vw, 128px);
+      line-height: .9;
+      letter-spacing: -.03em;
+    }
+    h1 span { display: block; }
+    h1 span:first-child { color: var(--navy); }
+    h1 span:last-child { color: var(--blue); }
+    h1 span:last-child { margin-left: .5em; } /* "Hello" sits indented under "Say" */
+    .lead {
+      font-size: clamp(15px, 1.5vw, 18px);
+      line-height: 1.7;
+      max-width: 38ch;
+      padding-bottom: 10px;
+    }
+
+    /* Two equal columns, same top and bottom edge */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(16px, 2.4vw, 28px);
+      align-items: stretch;
+    }
+    .info {
+      display: grid;
+      grid-auto-rows: 1fr;
+      gap: clamp(12px, 1.6vw, 18px);
+    }
+
+    /* Shared card surface */
+    .cc,
+    .cf {
+      background: var(--card);
+      border: 1.5px solid var(--line);
+      border-radius: 24px;
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      transition: background .6s, border-color .4s, transform .4s cubic-bezier(.3, 1.4, .5, 1);
+    }
+
+    /* Contact cards */
+    .cc {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 20px 24px;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    a.cc:hover { transform: translateY(-4px); border-color: var(--pink); }
+    .ico {
+      flex: none;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--navy);
+      transition: background .4s, transform .4s;
+    }
+    a.cc:hover .ico { background: var(--pink); transform: rotate(-8deg); }
+    .ico svg {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: #fff;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    html[data-theme=dark] .ico svg { stroke: #0b1020; }
+    .cc small { display: block; font-size: 12px; font-weight: 500; color: var(--mut); margin-bottom: 2px; }
+    .cc b { font-size: 15px; font-weight: 600; word-break: break-word; }
+
+    /* Message form */
+    .cf { padding: clamp(22px, 3vw, 34px); }
+    .cf h2 { font-weight: 600; font-size: clamp(22px, 2.4vw, 28px); margin-bottom: 6px; }
+    .cf label { display: block; font-size: 13px; font-weight: 600; margin: 16px 0 6px; }
+    .cf input,
+    .cf textarea {
+      width: 100%;
+      font: inherit;
+      font-size: 15px;
+      color: var(--ink);
+      background: var(--field);
+      border: 1.5px solid var(--line);
+      border-radius: 14px;
+      padding: 13px 15px;
+      outline: none;
+      transition: border-color .3s, box-shadow .3s, background .6s;
+    }
+    .cf textarea { min-height: 130px; resize: vertical; }
+    .cf input:focus,
+    .cf textarea:focus { border-color: var(--pink); box-shadow: 0 0 0 4px rgba(224, 64, 127, .16); }
+    .cf button {
+      margin-top: 22px;
+      width: 100%;
+      border: 0;
+      border-radius: 30px;
+      padding: 15px 22px;
+      font: 600 15px Poppins, sans-serif;
+      color: #fff;
+      background: var(--pink);
+      cursor: pointer;
+      transition: transform .3s, box-shadow .3s;
+    }
+    html[data-theme=dark] .cf button { color: #0b1020; }
+    .cf button:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(224, 64, 127, .35); }
+    .note { font-size: 13px; margin-top: 12px; min-height: 1.3em; color: var(--blue); opacity: 0; transition: opacity .5s; }
+    .note.show { opacity: 1; }
+
+    /* Footer */
+    .foot {
+      margin-top: clamp(28px, 5vw, 52px);
+      padding-top: 20px;
+      border-top: 1.5px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--mut);
+    }
+    .foot a { color: var(--navy); font-weight: 600; text-decoration: none; border-bottom: 1.5px solid var(--pink); }
+
+    /* ---------- Entrance animation (once) ---------- */
+    .rise { animation: rise .9s cubic-bezier(.2, .8, .2, 1) both; animation-delay: var(--d, 0s); }
+    @keyframes rise { from { opacity: 0; transform: translateY(24px); } }
+
+    /* ---------- Theme switch: circle grows from the toggle ---------- */
+    ::view-transition-old(root),
+    ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+    ::view-transition-new(root) {
+      clip-path: circle(0 at var(--tx, 90%) var(--ty, 5%));
+      animation: reveal .95s cubic-bezier(.65, 0, .35, 1) forwards;
+    }
+    @keyframes reveal { to { clip-path: circle(150vmax at var(--tx, 90%) var(--ty, 5%)); } }
+    html.vt body, html.vt .bg, html.vt .blob, html.vt nav, html.vt .cc, html.vt .cf { transition: none !important; }
+
+    /* ---------- Phones: same layout as desktop, scaled to fit ---------- */
+    @media (max-width: 760px) {
+      nav { left: 12px; transform: none; font-size: 11.5px; }
+      nav a { padding: 8px 7px; }
+      .wrap { width: calc(100% - 24px); padding-top: calc(env(safe-area-inset-top, 0px) + 84px); }
+      .head { gap: 12px; margin-bottom: 22px; }
+      h1 { font-size: clamp(44px, 12.5vw, 80px); }
+      .tag { font-size: 14px; margin-bottom: 6px; }
+      .lead { font-size: 12px; line-height: 1.65; padding-bottom: 6px; }
+      .grid { gap: 10px; }
+      .info { gap: 10px; }
+      .cc { flex-direction: column; align-items: flex-start; gap: 8px; padding: 14px 12px; border-radius: 18px; }
+      .ico { width: 34px; height: 34px; }
+      .ico svg { width: 17px; height: 17px; }
+      .cc small { font-size: 10px; }
+      .cc b { font-size: 11px; }
+      .cf { padding: 16px 12px; border-radius: 18px; }
+      .cf h2 { font-size: 16px; }
+      .cf label { font-size: 11px; margin: 10px 0 4px; }
+      .cf input, .cf textarea { font-size: 16px; padding: 10px 11px; border-radius: 11px; } /* 16px stops iPhone zoom */
+      .cf textarea { min-height: 96px; }
+      .cf button { font-size: 13px; padding: 12px 14px; margin-top: 16px; }
+      .note { font-size: 11px; }
+      .foot { font-size: 11.5px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Drawn background (no video) -->
+  <div class="bg" aria-hidden="true">
+    <i class="blob a"></i><i class="blob b"></i><i class="blob c"></i>
+    <div class="stars" id="stars"><b></b></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#education">Education</a>
+    <a href="contact.html" class="cur">Contact</a>
+  </nav>
+
+  <!-- Dark / light toggle -->
+  <button id="tg" class="tg" aria-label="Switch dark and light mode" aria-pressed="false">
+    <span class="st"><i></i><i></i><i></i></span>
+    <span class="cl"></span>
+    <span class="kn"><b></b><b></b></span>
+  </button>
+
+  <main class="wrap">
+
+    <!-- Heading -->
+    <header class="head">
+      <div class="rise">
+        <span class="tag">Contact Me!</span>
+        <h1 aria-label="Say hello"><span>SAY</span><span>HELLO</span></h1>
+      </div>
+      <p class="lead rise" style="--d:.15s">Have a project, an idea or just want to say hi? Send me a message and I will reply soon.</p>
+    </header>
+
+    <section class="grid">
+
+      <!-- Left: contact cards -->
+      <div class="info">
+        <a class="cc rise" style="--d:.2s" href="mailto:adishp449@gmail.com">
+          <span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+          <span><small>Email</small><b>adishp449@gmail.com</b></span>
+        </a>
+        <div class="cc rise" style="--d:.3s">
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1"/></svg></span>
+          <span><small>GitHub and LinkedIn</small><b>To be added later</b></span>
+        </div>
+        <div class="cc rise" style="--d:.4s">
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+          <span><small>Based in</small><b>Kannur, Kerala, India</b></span>
+        </div>
+      </div>
+
+      <!-- Right: message form (opens the email app) -->
+      <form class="cf rise" style="--d:.25s" id="cf" novalidate>
+        <h2>Send a message</h2>
+        <label for="cn1">Your name</label>
+        <input id="cn1" type="text" autocomplete="name">
+        <label for="ce">Your email</label>
+        <input id="ce" type="email" autocomplete="email">
+        <label for="cm">Message</label>
+        <textarea id="cm"></textarea>
+        <button type="submit">Send message</button>
+        <div class="note" id="cn" role="status"></div>
+      </form>
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="foot">
+      <span>© 2025 Adish</span>
+      <a href="index.html">← Back to the portfolio</a>
+    </footer>
+
+  </main>
+
+  <script>
+    (function () {
+      var H = document.documentElement;
+      var tg = document.getElementById('tg');
+
+      /* ---------- Theme (shared with the main page) ---------- */
+      function set(t) {
+        H.setAttribute('data-theme', t);
+        tg.setAttribute('aria-pressed', t === 'dark');
+        try { localStorage.setItem('theme2', t); } catch (e) {}
+      }
+      tg.setAttribute('aria-pressed', H.getAttribute('data-theme') === 'dark');
+
+      tg.addEventListener('click', function () {
+        var n = H.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        var r = tg.getBoundingClientRect();
+        H.style.setProperty('--tx', (r.left + r.width / 2) + 'px');
+        H.style.setProperty('--ty', (r.top + r.height / 2) + 'px');
+
+        if (document.startViewTransition && !matchMedia('(prefers-reduced-motion:reduce)').matches) {
+          H.classList.add('vt');
+          var x = document.startViewTransition(function () { set(n); });
+          x.finished.then(
+            function () { H.classList.remove('vt'); },
+            function () { H.classList.remove('vt'); }
+          );
+        } else {
+          set(n);
+        }
+      });
+
+      /* ---------- Stars (dark mode) ---------- */
+      var sc = document.getElementById('stars');
+      for (var i = 0; i < 40; i++) {
+        var s = document.createElement('i');
+        s.style.cssText =
+          'left:' + (Math.random() * 100) + '%;' +
+          'top:' + (Math.random() * 100) + '%;' +
+          'animation-delay:-' + (Math.random() * 2.4) + 's;' +
+          'transform:scale(' + (0.6 + Math.random()) + ')';
+        sc.appendChild(s);
+      }
+
+      /* ---------- Form: opens the visitor's email app ---------- */
+      var f = document.getElementById('cf');
+      var note = document.getElementById('cn');
+      f.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var name = document.getElementById('cn1').value.trim();
+        var mail = document.getElementById('ce').value.trim();
+        var msg = document.getElementById('cm').value.trim();
+
+        if (!name || !msg) {
+          note.textContent = 'Please add your name and a message.';
+          note.className = 'note show';
+          return;
+        }
+        var body = msg + '\n\n- ' + name + (mail ? ' (' + mail + ')' : '');
+        location.href = 'mailto:adishp449@gmail.com' +
+          '?subject=' + encodeURIComponent('Portfolio message from ' + name) +
+          '&body=' + encodeURIComponent(body);
+        note.textContent = 'Opening your email app... thank you!';
+        note.className = 'note show';
+      });
+    })();
+  </script>
+</body>
+</html>
